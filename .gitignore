@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# IDE
+.idea/
+.vscode/
+
+# Runtime outputs
+experiments/
+logs/
+results/
+checkpoint/
+tb_logger/
+cache/
+adaptive_matching.txt
+
+# Model weights
+*.pth
+*.pt
+*.ckpt
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Keep the two released pretrained checkpoints
+!pretrained/
+!pretrained/stage1/
+!pretrained/stage2/
+!pretrained/stage1/I22000_E0067_gen.pth
+!pretrained/stage2/I50000_E151_gen.pth

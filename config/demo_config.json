@@ -1,0 +1,142 @@
+{
+  "name": "dual_demo",
+  "phase": "val",
+  "gpu_ids": [
+    0
+  ],
+  "path": {
+    "log": "logs",
+    "tb_logger": "tb_logger",
+    "results": "results",
+    "checkpoint": "checkpoint",
+    "resume_state": "pretrained/stage2/I50000_E151"
+  },
+  "datasets": {
+    "train": {
+      "name": "inference_data",
+      "dataroot": "demo_data/test.tif",
+      "phase": "train",
+      "val_volume_idx": null,
+      "val_slice_idx": null,
+      "val_frame_idx": null,
+      "batch_size": 16,
+      "num_workers": 0,
+      "use_shuffle": true,
+      "time_seq": true,
+      "norm_method": "snorm",
+      "use_mmap": false,
+      "window_size": 5,
+      "chunk_size": 1,
+      "time_cond": true,
+      "space_cond": false,
+      "global_cond": true
+    },
+    "val": {
+      "name": "inference_data",
+      "dataroot": "demo_data/test.tif",
+      "gt_dataroot": null,
+      "phase": "val",
+      "val_volume_idx": "all",
+      "val_slice_idx": "all",
+      "val_frame_idx": "all",
+      "batch_size": 1,
+      "num_workers": 0,
+      "time_seq": true,
+      "norm_method": "snorm",
+      "use_mmap": false,
+      "window_size": 5,
+      "chunk_size": 1,
+      "time_cond": true,
+      "space_cond": false,
+      "global_cond": true
+    }
+  },
+  "model": {
+    "finetune_norm": false,
+    "min_max": [
+      -1,
+      1
+    ],
+    "unet": {
+      "in_channel": 4,
+      "out_channel": 1,
+      "image_size": 256,
+      "inner_channel": 32,
+      "norm_groups": 32,
+      "channel_multiplier": [
+        1,
+        2,
+        4,
+        8,
+        8
+      ],
+      "attn_res": [
+        16
+      ],
+      "res_blocks": 2,
+      "dropout": 0.0,
+      "version": "v1",
+      "padding_size": 32,
+      "padding_mode": "reflect",
+      "init_type": "orthogonal"
+    },
+    "beta_schedule": {
+      "n_timestep": 1000,
+      "linear_start": 5e-05,
+      "linear_end": 0.01
+    },
+    "eta": 0.5
+  },
+  "train": {
+    "n_iter": 50000,
+    "val_freq": 5000.0,
+    "save_checkpoint_freq": 5000.0,
+    "print_freq": 500.0,
+    "optimizer": {
+      "type": "adam",
+      "lr": 0.0001
+    }
+  },
+  "s1_model": {
+    "resume_state": "pretrained/stage1/I22000_E0067",
+    "unet": {
+      "in_channel": 1,
+      "out_channel": 1,
+      "inner_channel": 32,
+      "norm_groups": 32,
+      "image_size": 256,
+      "channel_multiplier": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "attn_res": [
+        0
+      ],
+      "res_blocks": 1,
+      "dropout": 0.0,
+      "version": "v1",
+      "padding_size": 0,
+      "padding_mode": "reflect"
+    },
+    "beta_schedule": {
+      "linear_start": 5e-05,
+      "linear_end": 0.01
+    },
+    "n_iter": 30000,
+    "val_freq": 2000.0,
+    "save_checkpoint_freq": 2000.0,
+    "print_freq": 200.0,
+    "optimizer": {
+      "type": "adam",
+      "lr": 0.0001
+    },
+    "min_max": [
+      0,
+      1
+    ]
+  },
+  "predenoise_path": null,
+  "match_file": null
+}
