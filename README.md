@@ -42,7 +42,10 @@ DUAL/
 ```
 
 ## Installation
-
+We recommend using Git LFS to download the code. The download command is as follows:
+```bash
+git clone git@github.com:feilab-hust/DUAL.git
+```
 Python 3.9 is recommended.
 
 ```bash
