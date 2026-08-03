@@ -4,8 +4,6 @@ Official inference code for **DUAL: Diffusion-based Self-supervised Adaptive Den
 
 DUAL is a two-stage self-supervised denoising framework for low-SNR time-lapse fluorescence microscopy. A regression network first provides a stable structural estimate, and a conditional diffusion model then restores fine details. Adaptive diffusion inversion (ADI) estimates a frame-specific starting timestep to accommodate time-varying degradation.
 
-This repository contains the **minimal inference implementation**. Training code and pretrained model files are not included.
-
 ## Repository structure
 
 ```text
